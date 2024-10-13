@@ -1,33 +1,63 @@
 import './App.css';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import LinkPreview from './components/LinkPreview';
 
 function Image({ id }: { id: number }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
 
   return (
-    <section>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isLoaded && isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 1, delay: 1 }}
-        onViewportEnter={() => setIsInView(true)}
-      >
-        <img src={`/${id}.jpg`} alt='' onLoad={() => setIsLoaded(true)} />
-        <div className='overlay'></div>
-        <div className='text'>
-          <div>
-            <h1>Bizning baxtli kunimizga xush kelibsiz!</h1>
-          </div>
+    <>
+      <LinkPreview
+        url='https://canva.com'
+        title='Canva: Visual Suite for Everyone'
+        description='Canva is a free-to-use online graphic design tool. Use it to create social media posts, presentations, posters, videos, logos and more.'
+        image='https://link_to_your_image.jpg'
+      />
+      <section>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isLoaded && isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 1, delay: 1 }}
+          onViewportEnter={() => setIsInView(true)}
+        >
+          <img src={`/${id}.jpg`} alt='' onLoad={() => setIsLoaded(true)} />
+          <div className='overlay'></div>
+          <div className='text'>
+            <div>
+              <h1>Bizning baxtli kunimizga xush kelibsiz!</h1>
+            </div>
 
-          <div className='date'>
-            <h3>Ibrohim vs Nigina</h3>
-            <h4>15 Oktober 2024, 18:00 PM</h4>
+            <div className='date'>
+              <h3>Ibrohim vs Nigina</h3>
+              <h4>15 Oktober 2024, 18:00 PM</h4>
+            </div>
           </div>
-        </div>
-      </motion.div>
-    </section>
+        </motion.div>
+      </section>
+      <section>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isLoaded && isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 1, delay: 1 }}
+          onViewportEnter={() => setIsInView(true)}
+        >
+          <img src={`/${id}.jpg`} alt='' onLoad={() => setIsLoaded(true)} />
+          <div className='overlay'></div>
+          <div className='text'>
+            <div>
+              <h1>Bizning baxtli kunimizga xush kelibsiz!</h1>
+            </div>
+
+            <div className='date'>
+              <h3>Ibrohim vs Nigina</h3>
+              <h4>15 Oktober 2024, 18:00 PM</h4>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+    </>
   );
 }
 

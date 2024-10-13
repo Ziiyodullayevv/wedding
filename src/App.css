@@ -87,35 +87,48 @@ img {
 h1 {
   font-family: 'Great Vibes', cursive;
   font-size: 45px;
-  background: radial-gradient(
-      ellipse farthest-corner at right bottom,
-      #ffe59a 0%,
-      #fdd87a 8%,
-      #c2a960 30%,
-      #a78f5e 40%,
-      transparent 80%
-    ),
-    radial-gradient(
-      ellipse farthest-corner at left top,
-      #ffffff 0%,
-      #fff9d4 8%,
-      #e5d3a0 25%,
-      #847349 62.5%,
-      #847349 100%
-    );
-
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: blue;
 }
 
 h2 {
   font-size: 30px;
-  background: linear-gradient(90deg, #ffd700, #ffb700, #ff8c00);
+  background-image: repeating-linear-gradient(
+    to right,
+    #a2682a 0%,
+    #be8c3c 8%,
+    #be8c3c 18%,
+    #d3b15f 27%,
+    #faf0a0 35%,
+    #ffffc2 40%,
+    #faf0a0 50%,
+    #d3b15f 58%,
+    #be8c3c 67%,
+    #b17b32 77%,
+    #bb8332 83%,
+    #d4a245 88%,
+    #e1b453 93%,
+    #a4692a 100%
+  );
+  background-size: 150%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
+  font-size: 80px;
+  font-weight: 200;
+  filter: drop-shadow(0 0 1px rgba(255, 200, 0, 0.3));
+  animation: MoveBackgroundPosition 6s ease-in-out infinite;
+}
+
+@keyframes MoveBackgroundPosition {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 h3 {
