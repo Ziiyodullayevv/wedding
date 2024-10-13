@@ -87,7 +87,23 @@ img {
 h1 {
   font-family: 'Great Vibes', cursive;
   font-size: 45px;
-  background: linear-gradient(90deg, #ffd700, #ffb700, #ff8c00);
+  background: radial-gradient(
+      ellipse farthest-corner at right bottom,
+      #ffe59a 0%,
+      #fdd87a 8%,
+      #c2a960 30%,
+      #a78f5e 40%,
+      transparent 80%
+    ),
+    radial-gradient(
+      ellipse farthest-corner at left top,
+      #ffffff 0%,
+      #fff9d4 8%,
+      #e5d3a0 25%,
+      #847349 62.5%,
+      #847349 100%
+    );
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: blue;
