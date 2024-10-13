@@ -22,7 +22,7 @@ body {
 }
 
 .text {
-  padding: 20px;
+  padding: 30px;
   color: var(--white);
   position: absolute;
   top: 0;
@@ -85,11 +85,6 @@ img {
 }
 
 h1 {
-  font-family: 'Great Vibes', cursive;
-  font-size: 45px;
-}
-
-h1 {
   background-image: repeating-linear-gradient(
     to right,
     #a2682a 0%,
@@ -112,7 +107,8 @@ h1 {
   -webkit-background-clip: text;
   color: transparent; /* Yaxshiroq ishlashi uchun -webkit-text-fill-color o'rniga ishlatiladi */
   -webkit-text-fill-color: transparent;
-  font-size: 80px;
+  font-family: 'Great Vibes', cursive;
+  font-size: 50px;
   font-weight: 200;
   filter: drop-shadow(
     2px 2px 4px rgba(255, 200, 0, 0.4)
@@ -135,8 +131,8 @@ h1 {
 }
 
 h3 {
-  font-size: 28px;
-  background: linear-gradient(90deg, #ffd700, #ffb700, #ff8c00);
+  font-size: 30px;
+  background: linear-gradient(90deg, #ffb700, #ffd700, #ffb700);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
