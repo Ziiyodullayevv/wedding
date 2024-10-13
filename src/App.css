@@ -89,8 +89,7 @@ h1 {
   font-size: 45px;
 }
 
-h2 {
-  font-size: 30px;
+h1 {
   background-image: repeating-linear-gradient(
     to right,
     #a2682a 0%,
@@ -108,12 +107,16 @@ h2 {
     #e1b453 93%,
     #a4692a 100%
   );
-  background-size: 150%;
+  background-size: 200%; /* Animatsiyani silliqlash uchun o'zgartirildi */
+  background-clip: text; /* Standart background-clip qo'shildi */
   -webkit-background-clip: text;
+  color: transparent; /* Yaxshiroq ishlashi uchun -webkit-text-fill-color o'rniga ishlatiladi */
   -webkit-text-fill-color: transparent;
   font-size: 80px;
   font-weight: 200;
-  filter: drop-shadow(0 0 1px rgba(255, 200, 0, 0.3));
+  filter: drop-shadow(
+    2px 2px 4px rgba(255, 200, 0, 0.4)
+  ); /* shadowni kuchaytirish uchun sozlandi */
   animation: MoveBackgroundPosition 6s ease-in-out infinite;
 }
 
