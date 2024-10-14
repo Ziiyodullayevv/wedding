@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import BackgroundMusic from './components/BackgroundMusic';
 
 function Image({ id }: { id: number }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -21,7 +22,7 @@ function Image({ id }: { id: number }) {
             <div>
               <h1>Bizning baxtli kunimizga xush kelibsiz!</h1>
             </div>
-
+            <BackgroundMusic />
             <div className='date'>
               <h3>Ibrohim vs Nigina</h3>
               <h4>15 Oktober 2024, 18:00 PM</h4>
