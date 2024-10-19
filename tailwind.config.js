@@ -2,9 +2,18 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
-    colors: {
-      gold: '#a4692a ',
+
+    extend: {
+      fontFamily: {
+        greatVibes: ['Great Vibes', 'cursive'],
+        parisienne: ['Parisienne', 'cursive'],
+        allura: ['Allura', 'cursive'],
+        poppins: ['Poppins', 'sans-serif'],
+        qwigley: ['Qwigley', 'cursive'],
+      },
+      colors: {
+        'ar-gold': '#d3b15f',
+      }
     },
   },
   plugins: [],

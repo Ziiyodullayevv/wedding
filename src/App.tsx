@@ -1,70 +1,210 @@
 import './App.css';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import CountdownTimer from './components/Timer';
+import TelegramBot from './components/Message';
+import TelegramChatIdFetcher from './components/ChatId';
 
-function ImageSection1() {
+export const fadeIn = (direction: string, delay: number) => ({
+  hidden: {
+    y: direction === 'up' ? 40 : direction === 'down' ? -40 : 0,
+    opacity: 0,
+    x: direction === 'left' ? 40 : direction === 'right' ? -40 : 0,
+  },
+  show: {
+    y: 0,
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: 'tween',
+      delay,
+      duration: 0.4,
+      ease: 'easeInOut',
+    },
+  },
+});
+
+function Image({
+  id,
+  title,
+  subtitle,
+  subtitle2,
+  names,
+  title2,
+  time,
+  date,
+  manzil,
+  map,
+  message,
+}: {
+  id: number;
+  title: string;
+  subtitle: string;
+  subtitle2: string;
+  names: boolean;
+  title2: string;
+  time: boolean;
+  date: string;
+  manzil: string;
+  map: boolean;
+  message: boolean;
+}) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
 
   return (
-    <section className='h-screen mx-auto max-w-[440px]'>
-      <motion.div
-        className='h-full px-4'
-        initial={{ opacity: 0 }}
-        animate={isLoaded && isInView ? { opacity: 1 } : { opacity: 1 }}
-        transition={{ duration: 1, delay: 1 }}
-        onViewportEnter={() => setIsInView(true)}
-        onLoad={() => setIsLoaded(true)}
-      >
-        <div className='h-full flex justify-center flex-col border-l border-r border-solid border-gold items-center bg-white'>
-          <h4 className='font-mono uppercase'>The wedding of</h4>
-          <h1 className='text-gold text-center text-2xl'>Ibrohim and Ezoza</h1>
+    <>
+      <section>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isLoaded && isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 1, delay: 1 }}
+          onViewportEnter={() => setIsInView(true)}
+        >
+          <img src={`public/${id}.jpg`} onLoad={() => setIsLoaded(true)} />
+          <div className='overlay'></div>
+          <div className='text'>
+            <div className='flex flex-col items-center'>
+              <motion.h2
+                variants={fadeIn('up', 0.2)}
+                initial='hidden'
+                whileInView='show'
+                className='ar-gold text-[50px]'
+                viewport={{ once: false, amount: 0.7 }}
+              >
+                {title}
+              </motion.h2>
+              <motion.h2
+                variants={fadeIn('up', 0.3)}
+                initial='hidden'
+                whileInView='show'
+                viewport={{ once: false, amount: 0.7 }}
+                className='text-[45px] ar-gold -mt-6'
+              >
+                {subtitle}
+              </motion.h2>
+              {time && <CountdownTimer />}
 
-          <div className='bg-[url("../../public/wed.jpg")] mt-8 bg-p w-[230px] ar-offset ar-shadow h-[350px] rounded-full'></div>
+              <motion.p
+                variants={fadeIn('up', 0.5)}
+                initial='hidden'
+                whileInView='show'
+                viewport={{ once: false, amount: 0.7 }}
+                className='text-base text-ar-gold mt-10'
+              >
+                {subtitle2}
+              </motion.p>
+            </div>
 
-          <div className='flex justify-center items-center gap-2 mt-8'>
-            <span className='w-[30px] h-[.5px] bg-gold inline-block'></span>
-            <h3 className='text-gold text-xl'>07.02. 2024</h3>
-            <span className='w-[30px] h-[.5px] bg-gold inline-block'></span>
+            {map && (
+              <motion.a
+                variants={fadeIn('up', 0.4)}
+                initial='hidden'
+                whileInView='show'
+                viewport={{ once: false, amount: 0.7 }}
+                href='https://yandex.uz/maps/-/CDdRnJir'
+              >
+                <div className='request-loader'>
+                  <span></span>
+                </div>
+              </motion.a>
+            )}
+
+            {message && <TelegramBot />}
+
+            <div className='flex flex-col items-center'>
+              <motion.h5
+                variants={fadeIn('up', 0.6)}
+                initial='hidden'
+                whileInView='show'
+                className='flex items-center gap-2 text-sm font-poppins uppercase text-gray-200'
+              >
+                <span className='w-[30px] h-[.5px] inline-block bg-gray-200'></span>
+                <span>{title2}</span>
+                <span className='w-[30px] h-[.5px] inline-block bg-gray-200'></span>
+              </motion.h5>
+              {names && (
+                <motion.h3
+                  variants={fadeIn('up', 0.7)}
+                  initial='hidden'
+                  whileInView='show'
+                  className='ar-gold text-[40px] mt-2 bg-red-500'
+                >
+                  Ibrohim vs E'zoza
+                </motion.h3>
+              )}
+              {manzil && (
+                <motion.h4
+                  variants={fadeIn('up', 0.6)}
+                  initial='hidden'
+                  whileInView='show'
+                  className='text-[20px] mt-10 text-yellow-200'
+                >
+                  {manzil}
+                </motion.h4>
+              )}
+              {date && (
+                <motion.h5
+                  variants={fadeIn('up', 0.6)}
+                  initial='hidden'
+                  whileInView='show'
+                  className='text-sm font-poppins mt-20 text-gray-200'
+                >
+                  {date}
+                </motion.h5>
+              )}
+            </div>
           </div>
-          <p className='uppercase font-mono text-center mt-4 text-sm max-w-72'>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          </p>
-
-          <h6 className='text-gold mt-4'>akobirjs@gmail.com</h6>
-        </div>
-      </motion.div>
-    </section>
-  );
-}
-
-function ImageSection2() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isInView, setIsInView] = useState(false);
-
-  return (
-    <section className='h-screen'>
-      <motion.div
-        className='h-full'
-        initial={{ opacity: 0 }}
-        animate={isLoaded && isInView ? { opacity: 0 } : { opacity: 1 }}
-        transition={{ duration: 1, delay: 1 }}
-        onViewportEnter={() => setIsInView(true)}
-        onLoad={() => setIsLoaded(true)}
-      >
-        <div className='h-full flex justify-center items-center bg-red-500'>
-          <div className='w-[280px] h-[400px] border border-solid border-black'></div>
-        </div>
-      </motion.div>
-    </section>
+        </motion.div>
+      </section>
+    </>
   );
 }
 
 export default function App() {
   return (
     <>
-      <ImageSection1 />
-      <ImageSection2 />
+      <Image
+        id={1}
+        title='Bizning baxtli'
+        subtitle='kunimizga xush kelibsiz!'
+        subtitle2=" Biz uchun eng muhim va esda qolarli kun — to'yimiz! Sizni ushbu xursandchilik onlarini biz bilan birgalikda nishonlashga chorlaymiz."
+        names={true}
+        title2='Wedding of the'
+        time={false}
+        date='04 noyabr 2024 16:00 da'
+        manzil=''
+        map={false}
+        message={false}
+      />
+
+      <Image
+        id={2}
+        title='Baxtli kunimizgacha'
+        subtitle=' qolgan lahzalar'
+        subtitle2=''
+        names={false}
+        title2='Manzil'
+        time={true}
+        date=''
+        manzil='Oqdaryo Tumani, "Bahor" toyxonasi'
+        map={true}
+        message={false}
+      />
+
+      <Image
+        id={3}
+        title='Baxtli kunimiz uchun'
+        subtitle='tilaklaringiz!'
+        subtitle2=''
+        names={false}
+        title2='Mezbon'
+        time={false}
+        date=''
+        manzil='Quvondiqovlar va Zokirovlar oilasi'
+        map={false}
+        message={true}
+      />
     </>
   );
 }
