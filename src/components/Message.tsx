@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { fadeIn } from '../App';
-import MyModal from './Dialog';
 
 const TelegramBot: React.FC = () => {
   const [message, setMessage] = useState<string>(''); // Matnni saqlash uchun state
@@ -23,9 +22,9 @@ const TelegramBot: React.FC = () => {
       const response = await fetch(sendPhotoUrl, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded', // Noto'g'ri format
+          'Content-Type': 'application/json', // To'g'ri format
         },
-        body: new URLSearchParams({
+        body: JSON.stringify({
           chat_id: chatId,
           photo: imageUrl, // Rasm URL'ini `photo` sifatida yuboramiz
           caption: message, // Matnni `caption` sifatida yuboramiz
@@ -59,7 +58,7 @@ const TelegramBot: React.FC = () => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      <MyModal />
+      <button type='submit'>Yuborish</button>
     </motion.form>
   );
 };
