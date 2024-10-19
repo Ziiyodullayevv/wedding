@@ -61,7 +61,11 @@ function Image({
           transition={{ duration: 1, delay: 0.5 }}
           onViewportEnter={() => setIsInView(true)}
         >
-          <img src={`public/${id}.jpg`} onLoad={() => setIsLoaded(true)} />
+          <img
+            src={`/${id}.jpg`} // `public` papkasidagi faylga to'g'ri URL
+            onLoad={() => setIsLoaded(true)}
+            alt={`Image ${id}`}
+          />
           <div className='overlay'></div>
           <div className='text'>
             <div className='flex flex-col items-center'>
