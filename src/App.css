@@ -124,3 +124,86 @@ img {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
 }
+.request-loader {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
+}
+
+.request-loader span {
+  z-index: 2;
+  display: inline-block;
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  background-position: center;
+  background-position-y: 60%;
+  background-size: 50%;
+  width: 100%;
+  height: 100%;
+  background-image: url('../public/Yandex-Maps-Logo-Vector.svg-.png') !important;
+}
+
+.request-loader::after {
+  opacity: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  content: '';
+  height: 100%;
+  width: 100%;
+  border: 1px solid rgb(255, 191, 30);
+  border-radius: 100%;
+  animation-name: ripple;
+  animation-duration: 3s;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.34, 1);
+  z-index: 1;
+}
+
+.request-loader::before {
+  opacity: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  content: '';
+  height: 100%;
+  width: 100%;
+  border: 1px solid rgb(255, 198, 28);
+  border-radius: 100%;
+  animation-name: ripple;
+  animation-duration: 3s;
+  animation-delay: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.34, 1);
+  z-index: 1;
+}
+
+@keyframes ripple {
+  from {
+    opacity: 1;
+    transform: scale3d(0.75, 0.75, 1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale3d(1.5, 1.5, 1);
+  }
+}
