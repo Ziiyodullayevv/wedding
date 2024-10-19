@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import CountdownTimer from './components/Timer';
 import TelegramBot from './components/Message';
+import { span } from 'framer-motion/client';
 
 export const fadeIn = (direction: string, delay: number) => ({
   hidden: {
@@ -94,7 +95,7 @@ function Image({
                 initial='hidden'
                 whileInView='show'
                 viewport={{ once: false, amount: 0.7 }}
-                className='text-base text-ar-gold mt-10'
+                className='text-xl text-yellow-200 mt-10'
               >
                 {subtitle2}
               </motion.p>
@@ -121,7 +122,7 @@ function Image({
                 variants={fadeIn('up', 0.6)}
                 initial='hidden'
                 whileInView='show'
-                className='flex items-center gap-2 text-sm font-poppins uppercase text-gray-200'
+                className='flex items-center gap-2 text-sm font-poppins uppercase text-yellow-100'
               >
                 <span className='w-[30px] h-[.5px] inline-block bg-gray-200'></span>
                 <span>{title2}</span>
@@ -148,14 +149,17 @@ function Image({
                 </motion.h4>
               )}
               {date && (
-                <motion.h5
-                  variants={fadeIn('up', 0.6)}
-                  initial='hidden'
-                  whileInView='show'
-                  className='text-sm font-poppins mt-20 text-gray-200'
-                >
-                  {date}
-                </motion.h5>
+                <>
+                  <span className='h-[0.3px] inline-block w-full bg-yellow-200 mt-6'></span>
+                  <motion.h5
+                    variants={fadeIn('up', 0.6)}
+                    initial='hidden'
+                    whileInView='show'
+                    className='text-sm font-poppins uppercase mt-10 text-yellow-200'
+                  >
+                    {date}
+                  </motion.h5>
+                </>
               )}
             </div>
           </div>
@@ -176,7 +180,7 @@ export default function App() {
         names={true}
         title2='Wedding of the'
         time={false}
-        date='04 noyabr 2024 16:00 da'
+        date='4 noyabr 2024 16:00'
         manzil=''
         map={false}
         message={false}

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { fadeIn } from '../App';
+import MyModal from './Dialog';
 
 const TelegramBot: React.FC = () => {
   const [message, setMessage] = useState<string>(''); // Matnni saqlash uchun state
@@ -32,13 +33,12 @@ const TelegramBot: React.FC = () => {
       });
 
       if (response.ok) {
-        alert('Rasm va xabar muvaffaqiyatli yuborildi!');
+        console.log('Rasm va xabar muvaffaqiyatli yuborildi!');
       } else {
-        alert("Xatolik yuz berdi, qayta urinib ko'ring.");
+        console.log("Xatolik yuz berdi, qayta urinib ko'ring.");
       }
     } catch (error) {
       console.error('Xato:', error);
-      alert('Xatolik yuz berdi.');
     }
 
     setMessage(''); // Matnni tozalash
@@ -53,15 +53,16 @@ const TelegramBot: React.FC = () => {
       onSubmit={sendMessageToTelegram}
     >
       <textarea
-        className='bg-white/10 -mt-14 min-h-[200px] h-[200px] text-yellow-100 focus:outline-solid focus:outline focus:outline-yellow-100 w-[100%] backdrop-blur-sm rounded-lg p-4'
+        className='bg-white/10 -mt-14 min-h-[180px] h-[180px] text-yellow-100 focus:outline-solid focus:outline focus:outline-yellow-100 w-[100%] backdrop-blur-sm rounded-lg p-4'
         placeholder='Tilaklaringiz...'
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
 
-      <button className='w-full bg-white/10 py-2 rounded-md' type='submit'>
+      {/* <button className='w-full bg-white/10 py-2 rounded-md' type='submit'>
         Yuborish
-      </button>
+      </button> */}
+      <MyModal />
     </motion.form>
   );
 };
