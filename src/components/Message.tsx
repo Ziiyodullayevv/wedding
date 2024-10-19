@@ -14,18 +14,18 @@ const TelegramBot: React.FC = () => {
     const chatId = '961047307'; // O'zingizning chat ID'ingizni kiriting
     const sendPhotoUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
 
-    // `public` papkasidagi rasmga URL yo'l
-    const imageUrl = `https://ibrohimezozawedding.netlify.app/2.jpg`; // Bu yerdagi rasm public/wedding.jpg papkasida
+    // Rasm URL'si
+    const imageUrl = `https://ibrohimezozawedding.netlify.app/2.jpg`; // URL
 
-    // Telegramga matn va rasmni fayl sifatida yuborish
+    // Telegramga matn va rasmni yuborish
     try {
       // Rasm va matnni birga yuborish
       const response = await fetch(sendPhotoUrl, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded', // Noto'g'ri format
         },
-        body: JSON.stringify({
+        body: new URLSearchParams({
           chat_id: chatId,
           photo: imageUrl, // Rasm URL'ini `photo` sifatida yuboramiz
           caption: message, // Matnni `caption` sifatida yuboramiz
@@ -35,7 +35,8 @@ const TelegramBot: React.FC = () => {
       if (response.ok) {
         console.log('Rasm va xabar muvaffaqiyatli yuborildi!');
       } else {
-        console.log("Xatolik yuz berdi, qayta urinib ko'ring.");
+        const data = await response.json(); // Xato haqida ma'lumot olish
+        console.log('Xatolik yuz berdi:', data.description);
       }
     } catch (error) {
       console.error('Xato:', error);
