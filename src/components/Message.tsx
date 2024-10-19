@@ -9,20 +9,19 @@ const TelegramBot: React.FC = () => {
   const sendMessageToTelegram = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const botToken = '7827172863:AAElUMyjAxO_DCMjWOwSbQBAVGo9LWTYofw'; // Telegram bot tokeningiz
+    const botToken = '7827172863:AAElUMyjAxO_DCMjWOwSbQBAVGo9LWTYofw'; // Telegram bot tokeningizni kiriting
     const chatId = '961047307'; // O'zingizning chat ID'ingizni kiriting
     const sendPhotoUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
 
-    // Rasm URL'si
-    const imageUrl = `https://ibrohimezozawedding.netlify.app/2.jpg`; // URL
+    // To'g'ridan-to'g'ri rasm URL (public papkada bo'lsa ham, foydalanuvchi kirishiga ruxsat bo'lishi kerak)
+    const imageUrl = 'https://ibrohimezozawedding.netlify.app/2.jpg'; // Tashqi URL sifatida
 
-    // Telegramga matn va rasmni yuborish
+    // Telegramga matn va rasmni fayl sifatida yuborish
     try {
-      // Rasm va matnni birga yuborish
       const response = await fetch(sendPhotoUrl, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json', // To'g'ri format
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           chat_id: chatId,
@@ -32,13 +31,13 @@ const TelegramBot: React.FC = () => {
       });
 
       if (response.ok) {
-        console.log('Rasm va xabar muvaffaqiyatli yuborildi!');
+        alert('Rasm va xabar muvaffaqiyatli yuborildi!');
       } else {
-        const data = await response.json(); // Xato haqida ma'lumot olish
-        console.log('Xatolik yuz berdi:', data.description);
+        alert("Xatolik yuz berdi, qayta urinib ko'ring.");
       }
     } catch (error) {
       console.error('Xato:', error);
+      alert('Xatolik yuz berdi.');
     }
 
     setMessage(''); // Matnni tozalash
@@ -53,12 +52,15 @@ const TelegramBot: React.FC = () => {
       onSubmit={sendMessageToTelegram}
     >
       <textarea
-        className='bg-white/10 -mt-14 min-h-[180px] h-[180px] text-yellow-100 focus:outline-solid focus:outline focus:outline-yellow-100 w-[100%] backdrop-blur-sm rounded-lg p-4'
+        className='bg-white/10 -mt-14 min-h-[200px] h-[200px] text-yellow-100 focus:outline-solid focus:outline focus:outline-yellow-100 w-[100%] backdrop-blur-sm rounded-lg p-4'
         placeholder='Tilaklaringiz...'
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      <button type='submit'>Yuborish</button>
+
+      <button className='w-full bg-white/10 py-2 rounded-md' type='submit'>
+        Yuborish
+      </button>
     </motion.form>
   );
 };
