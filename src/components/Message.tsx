@@ -14,7 +14,7 @@ const TelegramBot: React.FC = () => {
     const sendPhotoUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
 
     // `public` papkasidagi rasmga URL yo'l
-    const imageUrl = `https://weddiing.netlify.app/wedding.jpg`; // Bu yerdagi rasm public/wedding.jpg papkasida
+    const imageUrl = `https://ibrohimezoza.netlify.app/2.jpg`; // Bu yerdagi rasm public/wedding.jpg papkasida
 
     // Telegramga matn va rasmni fayl sifatida yuborish
     try {
