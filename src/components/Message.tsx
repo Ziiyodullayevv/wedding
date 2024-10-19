@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { fadeIn } from '../App';
+import MyModal from './Dialog';
 
 const TelegramBot: React.FC = () => {
   const [message, setMessage] = useState<string>(''); // Matnni saqlash uchun state
@@ -11,33 +12,29 @@ const TelegramBot: React.FC = () => {
 
     const botToken = '7827172863:AAElUMyjAxO_DCMjWOwSbQBAVGo9LWTYofw'; // Telegram bot tokeningizni kiriting
     const chatId = '961047307'; // O'zingizning chat ID'ingizni kiriting
-    const sendPhotoUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
+    const sendMessageUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
-    // To'g'ridan-to'g'ri rasm URL (public papkada bo'lsa ham, foydalanuvchi kirishiga ruxsat bo'lishi kerak)
-    const imageUrl = 'https://ibrohimezozawedding.netlify.app/2.jpg'; // Tashqi URL sifatida
-
-    // Telegramga matn va rasmni fayl sifatida yuborish
+    // Telegramga matn yuborish
     try {
-      const response = await fetch(sendPhotoUrl, {
+      const response = await fetch(sendMessageUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           chat_id: chatId,
-          photo: imageUrl, // Rasm URL'ini `photo` sifatida yuboramiz
-          caption: message, // Matnni `caption` sifatida yuboramiz
+          text: `Tilaklarni qabul qiling!\n\n${message}`, // Sarlavhani qo'shish
         }),
       });
 
       if (response.ok) {
-        alert('Rasm va xabar muvaffaqiyatli yuborildi!');
+        console.log('Xabar muvaffaqiyatli yuborildi!');
       } else {
-        alert("Xatolik yuz berdi, qayta urinib ko'ring.");
+        console.log('Xatolik yuz berdi, qayta urinib koring.');
       }
     } catch (error) {
       console.error('Xato:', error);
-      alert('Xatolik yuz berdi.');
+      console.log('Xatolik yuz berdi.');
     }
 
     setMessage(''); // Matnni tozalash
@@ -57,10 +54,7 @@ const TelegramBot: React.FC = () => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-
-      <button className='w-full bg-white/10 py-2 rounded-md' type='submit'>
-        Yuborish
-      </button>
+      <MyModal />
     </motion.form>
   );
 };
