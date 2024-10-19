@@ -46,7 +46,7 @@ const TelegramBot: React.FC = () => {
 
   return (
     <motion.form
-      className='w-full'
+      className='w-full'  
       variants={fadeIn('up', 0.5)}
       initial='hidden'
       whileInView='show'
