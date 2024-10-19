@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import CountdownTimer from './components/Timer';
 import TelegramBot from './components/Message';
-import TelegramChatIdFetcher from './components/ChatId';
 
 export const fadeIn = (direction: string, delay: number) => ({
   hidden: {

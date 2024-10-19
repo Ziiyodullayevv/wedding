@@ -14,7 +14,7 @@ const TelegramBot: React.FC = () => {
     const sendPhotoUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
 
     // `public` papkasidagi rasmga URL yo'l
-    const imageUrl = `${window.location.origin}/wedding.jpg`; // Bu yerdagi rasm public/wedding.jpg papkasida
+    const imageUrl = `https://weddiing.netlify.app/wedding.jpg`; // Bu yerdagi rasm public/wedding.jpg papkasida
 
     // Telegramga matn va rasmni fayl sifatida yuborish
     try {
@@ -46,7 +46,7 @@ const TelegramBot: React.FC = () => {
 
   return (
     <motion.form
-      className='w-full'  
+      className='w-full'
       variants={fadeIn('up', 0.5)}
       initial='hidden'
       whileInView='show'
