@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .great-vibes-regular {
   font-family: 'Great Vibes', cursive;
   font-weight: 400;

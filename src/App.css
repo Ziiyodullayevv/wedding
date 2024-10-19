@@ -1,28 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Allura&family=Great+Vibes&family=Parisienne&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Qwigley&display=swap');
 
 body {
-  --black: #000000;
-  --ash-black: #222;
-  --white: #fafafa;
-  --sky: #00ccff;
-  --green: #22dddd;
-  --blue: #1300ff;
-  --dusk: #6600ff;
-  --purple: #9900ff;
-  --pink: #ff0066;
-  --red: #fe0222;
-  --orange: #fd7702;
-  --yellow: #ffbb00;
-  --background: var(--white);
-  --accent: var(--blue);
   font-family: 'Parisienne', cursive;
   margin: 0;
   padding: 0;
-  background-color: var(--background);
+  background-color: black;
+  color: rgb(246, 235, 220);
 }
 
 .text {
-  padding: 30px;
+  padding: 60px 30px;
   color: var(--white);
   position: absolute;
   top: 0;
@@ -30,7 +17,7 @@ body {
   right: 0;
   bottom: 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
   text-align: center;
@@ -84,7 +71,7 @@ img {
   }
 }
 
-h1 {
+.ar-gold {
   background-image: repeating-linear-gradient(
     to right,
     #a2682a 0%,
@@ -108,11 +95,10 @@ h1 {
   color: transparent; /* Yaxshiroq ishlashi uchun -webkit-text-fill-color o'rniga ishlatiladi */
   -webkit-text-fill-color: transparent;
   font-family: 'Great Vibes', cursive;
-  font-size: 50px;
   font-weight: 200;
   filter: drop-shadow(
     2px 2px 4px rgba(255, 200, 0, 0.4)
-  ); /* shadowni kuchaytirish uchun sozlandi */ 
+  ); /* shadowni kuchaytirish uchun sozlandi */
   animation: MoveBackgroundPosition 6s ease-in-out infinite;
 }
 
@@ -130,34 +116,11 @@ h1 {
   }
 }
 
-h3 {
-  font-size: 30px;
-  background: linear-gradient(90deg, #ffb700, #ffd700, #ffb700);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-}
-
-h4 {
-  color: #c0c0c0;
-  font-family: 'Allura', cursive;
-
-  font-size: 16px;
-}
-
 .overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-}
-
-.date {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  background: rgba(0, 0, 0, 0.5);
 }
