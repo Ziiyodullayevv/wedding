@@ -58,10 +58,6 @@ const TelegramBot: React.FC = () => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-
-      {/* <button className='w-full bg-white/10 py-2 rounded-md' type='submit'>
-        Yuborish
-      </button> */}
       <MyModal />
     </motion.form>
   );
