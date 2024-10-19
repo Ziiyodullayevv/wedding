@@ -32,7 +32,6 @@ function Image({
             <div className='flex flex-col items-center'>
               <h2 className='ar-gold text-[50px]'>{title}</h2>
               <h2 className='text-[45px] ar-gold -mt-6'>{subtitle}</h2>
-              <hr />
               <p className='text-base text-ar-gold mt-10'>{subtitle2}</p>
             </div>
 
