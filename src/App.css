@@ -10,7 +10,7 @@ body {
 
 .text {
   padding: 60px 30px;
-  color: var(--white);
+  color: white;
   position: absolute;
   top: 0;
   left: 0;

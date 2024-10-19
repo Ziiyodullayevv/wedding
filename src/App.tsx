@@ -53,11 +53,12 @@ function Image({
 
   return (
     <>
+      <div className='h-[50px]'></div>
       <section>
         <motion.div
           initial={{ opacity: 0 }}
           animate={isLoaded && isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 1, delay: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
           onViewportEnter={() => setIsInView(true)}
         >
           <img src={`public/${id}.jpg`} onLoad={() => setIsLoaded(true)} />
