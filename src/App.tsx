@@ -232,7 +232,7 @@ export default function App() {
       ) : (
         <div className='flex justify-center  items-center h-screen'>
           {/* Desktop qurilmalari uchun xabar */}
-          <h2 className='text-4xl text-yellow-200'>
+          <h2 className='text-4xl text-yellow-200 text-center'>
             Saytni faqat telefon orqali ko'rish mumkin
           </h2>
         </div>
