@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Dialog, DialogDescription, DialogTitle } from '@headlessui/react';
+import { Dialog, DialogTitle } from '@headlessui/react';
 
 export default function BackgroundMusic() {
   const [isOpen, setIsOpen] = useState(true);
