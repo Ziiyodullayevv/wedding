@@ -49,7 +49,7 @@ const TelegramBot: React.FC = () => {
       onSubmit={sendMessageToTelegram}
     >
       <textarea
-        className='bg-white/10 -mt-14 min-h-[200px] h-[200px] text-yellow-100 focus:outline-solid focus:outline focus:outline-yellow-100 w-[100%] backdrop-blur-sm rounded-lg p-4'
+        className='bg-white/10 font-montserrat placeholder:text-yellow-100  -mt-14 min-h-[200px] h-[200px] text-yellow-100 focus:outline-solid focus:outline focus:outline-yellow-100 w-[100%] backdrop-blur-sm rounded-lg p-4'
         placeholder='Tilaklaringiz...'
         value={message}
         onChange={(e) => setMessage(e.target.value)}

@@ -17,7 +17,7 @@ export default function MyModal() {
       <Button
         type='submit'
         onClick={open}
-        className='w-full bg-white/10 py-2 rounded-md'
+        className='w-full font-montserrat text-yellow-100 bg-white/10 py-2 rounded-md'
       >
         Yuborish
       </Button>
@@ -36,17 +36,17 @@ export default function MyModal() {
             >
               <DialogTitle
                 as='h3'
-                className='text-base/7 font-poppins font-medium text-white/80'
+                className='text-base/7 font-montserrat font-medium text-yellow-100'
               >
                 Xabaringiz yuborildi!
               </DialogTitle>
-              <p className='mt-2 font-poppins text-sm/6 text-white/50'>
+              <p className='mt-2 font-montserrat text-sm/6 text-yellow-200'>
                 Ezgu tilaklaringiz uchun tashakkur! Sizni baxtli kunimizda kutib
                 qolamiz!
               </p>
               <div className='mt-4'>
                 <Button
-                  className='w-full font-poppins bg-white/10 py-2 rounded-md'
+                  className='w-full font-montserrat bg-white/10 text-yellow-100 py-2 rounded-md'
                   onClick={close}
                 >
                   Yopish

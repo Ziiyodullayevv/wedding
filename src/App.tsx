@@ -94,7 +94,7 @@ function Image({
                 initial='hidden'
                 whileInView='show'
                 viewport={{ once: false, amount: 0.7 }}
-                className='text-xl text-yellow-200 mt-10'
+                className='text-xl font-montserrat text-yellow-100 mt-10'
               >
                 {subtitle2}
               </motion.p>
@@ -121,7 +121,7 @@ function Image({
                 variants={fadeIn('up', 0.6)}
                 initial='hidden'
                 whileInView='show'
-                className='flex items-center gap-2 text-sm font-poppins uppercase text-yellow-100'
+                className='flex items-center gap-2 text-sm font-montserrat uppercase text-yellow-100'
               >
                 <span className='w-[30px] h-[.5px] inline-block bg-gray-200'></span>
                 <span>{title2}</span>
@@ -134,7 +134,7 @@ function Image({
                   whileInView='show'
                   className='ar-gold text-[40px] mt-2 bg-red-500'
                 >
-                  Ibrohim vs E'zoza
+                  Ibrohim vs Ezoza
                 </motion.h3>
               )}
               {manzil && (
@@ -142,7 +142,7 @@ function Image({
                   variants={fadeIn('up', 0.6)}
                   initial='hidden'
                   whileInView='show'
-                  className='text-[20px] mt-10 text-yellow-200'
+                  className='text-[20px] mt-10 font-montserrat text-yellow-100'
                 >
                   {manzil}
                 </motion.h4>
@@ -154,7 +154,7 @@ function Image({
                     variants={fadeIn('up', 0.6)}
                     initial='hidden'
                     whileInView='show'
-                    className='text-sm font-poppins uppercase mt-10 text-yellow-200'
+                    className='text-sm font-montserrat uppercase mt-10 text-yellow-100'
                   >
                     {date}
                   </motion.h5>
