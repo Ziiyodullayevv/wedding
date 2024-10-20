@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import CountdownTimer from './components/Timer';
 import TelegramBot from './components/Message';
@@ -170,50 +170,73 @@ function Image({
 }
 
 export default function App() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Qurilma mobil ekanligini aniqlaymiz
+    const checkDevice = () => {
+      const userAgent = navigator.userAgent;
+      const mobile = /iPhone|iPad|iPod|Android/i.test(userAgent);
+      setIsMobile(mobile);
+    };
+
+    checkDevice();
+  }, []);
   return (
-    <>
-      <BackgroundMusic />
-      <Image
-        id={1}
-        title='Bizning baxtli'
-        subtitle='kunimizga xush kelibsiz!'
-        subtitle2=" Biz uchun eng muhim va esda qolarli kun — to'yimiz! Sizni ushbu xursandchilik onlarini biz bilan birgalikda nishonlashga chorlaymiz."
-        names={true}
-        title2='Wedding of the'
-        time={false}
-        date='4 noyabr 2024 16:00'
-        manzil=''
-        map={false}
-        message={false}
-      />
+    <div>
+      {isMobile ? (
+        <>
+          <BackgroundMusic />
+          <Image
+            id={1}
+            title='Bizning baxtli'
+            subtitle='kunimizga xush kelibsiz!'
+            subtitle2=" Biz uchun eng muhim va esda qolarli kun — to'yimiz! Sizni ushbu xursandchilik onlarini biz bilan birgalikda nishonlashga chorlaymiz."
+            names={true}
+            title2='Wedding of the'
+            time={false}
+            date='4 noyabr 2024 16:00'
+            manzil=''
+            map={false}
+            message={false}
+          />
 
-      <Image
-        id={2}
-        title='Baxtli kunimizgacha'
-        subtitle=' qolgan lahzalar'
-        subtitle2=''
-        names={false}
-        title2='Manzil'
-        time={true}
-        date=''
-        manzil='Oqdaryo Tumani, "Bahor" toyxonasi'
-        map={true}
-        message={false}
-      />
+          <Image
+            id={2}
+            title='Baxtli kunimizgacha'
+            subtitle=' qolgan lahzalar'
+            subtitle2=''
+            names={false}
+            title2='Manzil'
+            time={true}
+            date=''
+            manzil='Oqdaryo Tumani, "Bahor" toyxonasi'
+            map={true}
+            message={false}
+          />
 
-      <Image
-        id={3}
-        title='Baxtli kunimiz uchun'
-        subtitle='tilaklaringiz!'
-        subtitle2=''
-        names={false}
-        title2='Mezbon'
-        time={false}
-        date=''
-        manzil='Quvondiqovlar va Zokirovlar oilasi'
-        map={false}
-        message={true}
-      />
-    </>
+          <Image
+            id={3}
+            title='Baxtli kunimiz uchun'
+            subtitle='tilaklaringiz!'
+            subtitle2=''
+            names={false}
+            title2='Mezbon'
+            time={false}
+            date=''
+            manzil='Quvondiqovlar va Zokirovlar oilasi'
+            map={false}
+            message={true}
+          />
+        </>
+      ) : (
+        <div className='flex justify-center  items-center h-screen'>
+          {/* Desktop qurilmalari uchun xabar */}
+          <h2 className='text-4xl text-yellow-200'>
+            Saytni faqat telefon orqali ko'rish mumkin
+          </h2>
+        </div>
+      )}
+    </div>
   );
 }
