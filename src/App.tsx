@@ -233,7 +233,7 @@ export default function App() {
         <div className='flex justify-center items-center h-screen'>
           {/* Desktop qurilmalari uchun xabar */}
           <motion.h2
-            variants={fadeIn('up', 1)}
+            variants={fadeIn('up', 3)}
             initial='hidden'
             whileInView='show'
             className='text-4xl text-yellow-200 text-center'

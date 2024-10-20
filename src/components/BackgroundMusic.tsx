@@ -27,11 +27,11 @@ export default function BackgroundMusic() {
       <Dialog
         open={isOpen}
         onClose={closeModal}
-        className='fixed inset-0 z-50 flex items-center justify-center'
+        className='fixed inset-0 z-50 flex items-center p-6 justify-center'
       >
         <div className='fixed inset-0 bg-black/20 backdrop-blur-md'></div>{' '}
         {/* Background qismi */}
-        <div className='relative bg-white/10 backdrop-blur-xl rounded-lg p-10 shadow-lg max-w-sm w-full z-50'>
+        <div className='relative bg-white/10 backdrop-blur-xl rounded-lg p-8 shadow-lg max-w-sm w-full z-50'>
           <DialogTitle className='text-xl font-montserrat text-yellow-200 font-semibold'>
             Tinglashga tayyormisiz?
           </DialogTitle>
