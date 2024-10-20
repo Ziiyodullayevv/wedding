@@ -54,7 +54,7 @@ const CountdownTimer: React.FC = () => {
     >
       <div>
         {timeLeft ? (
-          <div className='flex gap-2 text-yellow-200 text-[24px]'>
+          <div className='flex gap-2 text-yellow-200 text-[26px]'>
             <p>
               {timeLeft.days > 9
                 ? `${timeLeft.days} kun`

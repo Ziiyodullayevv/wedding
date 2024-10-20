@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import CountdownTimer from './components/Timer';
 import TelegramBot from './components/Message';
+import BackgroundMusic from './components/BackgroundMusic';
 
 export const fadeIn = (direction: string, delay: number) => ({
   hidden: {
@@ -106,7 +107,7 @@ function Image({
                 initial='hidden'
                 whileInView='show'
                 viewport={{ once: false, amount: 0.7 }}
-                href='https://yandex.uz/maps/-/CDdRnJir'
+                href='https://maps.app.goo.gl/YypbwNLgT8nkXC9j6'
               >
                 <div className='request-loader'>
                   <span></span>
@@ -171,6 +172,7 @@ function Image({
 export default function App() {
   return (
     <>
+      <BackgroundMusic />
       <Image
         id={1}
         title='Bizning baxtli'
