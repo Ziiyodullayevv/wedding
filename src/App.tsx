@@ -230,11 +230,16 @@ export default function App() {
           />
         </>
       ) : (
-        <div className='flex justify-center  items-center h-screen'>
+        <div className='flex justify-center items-center h-screen'>
           {/* Desktop qurilmalari uchun xabar */}
-          <h2 className='text-4xl text-yellow-200 text-center'>
+          <motion.h2
+            variants={fadeIn('up', 1)}
+            initial='hidden'
+            whileInView='show'
+            className='text-4xl text-yellow-200 text-center'
+          >
             Saytni faqat telefon orqali ko'rish mumkin
-          </h2>
+          </motion.h2>
         </div>
       )}
     </div>
