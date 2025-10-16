@@ -204,7 +204,7 @@ export default function App() {
 						className="text-white text-center"
 					>
 						<h2 className="text-2xl font-semibold mb-2">
-							Musiqa bilan tajribani boshlash uchun bosing
+							Musiqa bilan boshlash uchun bosing
 						</h2>
 						<p className="text-sm opacity-80">(Bir marta bosish kifoya)</p>
 					</motion.div>
