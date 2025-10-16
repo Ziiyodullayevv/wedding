@@ -134,7 +134,7 @@ function Image({
 									whileInView="show"
 									className="ar-gold text-[40px] mt-2"
 								>
-									Ismoiljon vs Ruxshonaoy
+									Ismoiljon vs Ruxshona
 								</motion.h3>
 							)}
 
@@ -210,14 +210,15 @@ export default function App() {
 					</motion.div>
 				</div>
 			)}
-
 			{isMobile ? (
 				<>
 					<Image
 						id={1}
 						title="Bizning baxtli"
 						subtitle="kunimizga xush kelibsiz!"
-						subtitle2="Biz uchun eng muhim va esda qolarli kun — to‘yimiz!"
+						subtitle2="Eng yorqin yulduzlar ham bugun biz bilan birga porlayotgandek,
+chunki bu kun — biz uchun eng muhim va eng esda qolarli kun,
+bizning nikoh to‘yimiz!"
 						names={true}
 						title2="Wedding of the"
 						time={false}
@@ -236,7 +237,7 @@ export default function App() {
 						title2="Manzil"
 						time={true}
 						date=""
-						manzil="Buloqboshi, Yong‘oqzor to‘yxonasi"
+						manzil="Buloqboshi tumani, Yong‘oqzor to‘yxonasi"
 						map={true}
 						message={false}
 					/>
