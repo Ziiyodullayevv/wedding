@@ -1,61 +1,39 @@
-import { useState, useRef } from 'react';
-import { Dialog, DialogTitle } from '@headlessui/react';
+import { useEffect, useRef } from "react";
 
-export default function BackgroundMusic() {
-  const [isOpen, setIsOpen] = useState(true);
-  const audioRef = useRef<HTMLAudioElement | null>(null); // Audio elementga TypeScript tipi berildi
+const BackgroundMusic = () => {
+	const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // "Ha" bosilganda musiqa ijro etiladi
-  const playMusic = () => {
-    if (audioRef.current) {
-      audioRef.current.play(); // Musiqa boshlanadi
-    }
-    setIsOpen(false); // Modal yopiladi
-  };
+	useEffect(() => {
+		const audio = audioRef.current;
+		if (!audio) return;
 
-  // "Yo'q" bosilganda modalni yopamiz
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+		// Muted holatda autoplay ishlaydi
+		audio.muted = true;
+		audio.play().catch(() => {
+			// brauzer bloklasa, muammo yo‘q — keyin unmute qilamiz
+		});
 
-  return (
-    <>
-      {/* Musiqa ijro qilish uchun audio element */}
-      <audio ref={audioRef} src='music.mp3' preload='auto'></audio>
+		// Foydalanuvchi biron harakat qilganda tovushni yoqish
+		const enableSound = () => {
+			audio.muted = false;
+			audio.play();
+			document.removeEventListener("mousemove", enableSound);
+			document.removeEventListener("touchstart", enableSound);
+			document.removeEventListener("scroll", enableSound);
+		};
 
-      {/* Headless UI dialog componenti orqali modal */}
-      <Dialog
-        open={isOpen}
-        onClose={closeModal}
-        className='fixed inset-0 z-50 flex items-center p-6 justify-center'
-      >
-        <div className='fixed inset-0 bg-black/20 backdrop-blur-md'></div>{' '}
-        {/* Background qismi */}
-        <div className='relative bg-white/10 backdrop-blur-xl rounded-lg p-8 shadow-lg max-w-sm w-full z-50'>
-          <DialogTitle className='text-xl font-montserrat text-yellow-200 font-semibold'>
-            Tinglashga tayyormisiz?
-          </DialogTitle>
-          <p className='mt-2 font-montserrat text-yellow-100'>
-            Baxtli kunimizga musiqaning latofati bilan hamroh bo'ling. Bu sehrli
-            kunga musiqa bilan kirib keling!
-          </p>
+		document.addEventListener("mousemove", enableSound);
+		document.addEventListener("touchstart", enableSound);
+		document.addEventListener("scroll", enableSound);
 
-          <div className='mt-4 flex justify-end space-x-3'>
-            <button
-              className='w-full font-montserrat bg-white/10 text-green-500 py-2 rounded-md'
-              onClick={playMusic}
-            >
-              Ha
-            </button>
-            <button
-              className='w-full font-montserrat bg-white/10 text-red-500 py-2 rounded-md'
-              onClick={closeModal}
-            >
-              Yo'q
-            </button>
-          </div>
-        </div>
-      </Dialog>
-    </>
-  );
-}
+		return () => {
+			document.removeEventListener("mousemove", enableSound);
+			document.removeEventListener("touchstart", enableSound);
+			document.removeEventListener("scroll", enableSound);
+		};
+	}, []);
+
+	return <audio ref={audioRef} src="/music.mp3" loop />;
+};
+
+export default BackgroundMusic;
