@@ -55,6 +55,7 @@ function Image({
 		<>
 			<section className="relative">
 				<motion.div
+					className="slide-container"
 					initial={{ opacity: 0 }}
 					animate={isLoaded && isInView ? { opacity: 1 } : { opacity: 0 }}
 					transition={{ duration: 1, delay: 0.5 }}
@@ -173,13 +174,68 @@ function Image({
 export default function App() {
 	const [isMobile, setIsMobile] = useState(false);
 	const [musicStarted, setMusicStarted] = useState(false);
+	const [isScrolling, setIsScrolling] = useState(false);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
+	const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
 	useEffect(() => {
 		const userAgent = navigator.userAgent;
 		const mobile = /iPhone|iPad|iPod|Android/i.test(userAgent);
 		setIsMobile(mobile);
 	}, []);
+
+	useEffect(() => {
+		let lastScrollTime = 0;
+		const scrollDelay = 1000; // 1 sekund scroll lock
+
+		const handleWheel = (e: WheelEvent) => {
+			const now = Date.now();
+			if (now - lastScrollTime < scrollDelay) {
+				e.preventDefault();
+				return;
+			}
+			lastScrollTime = now;
+		};
+
+		const handleTouchStart = () => {
+			setIsScrolling(false);
+		};
+
+		const handleTouchMove = (e: TouchEvent) => {
+			if (isScrolling) {
+				e.preventDefault();
+			}
+		};
+
+		const handleScroll = () => {
+			if (!isScrolling) {
+				setIsScrolling(true);
+
+				if (scrollTimeout.current) {
+					clearTimeout(scrollTimeout.current);
+				}
+
+				scrollTimeout.current = setTimeout(() => {
+					setIsScrolling(false);
+				}, 1000);
+			}
+		};
+
+		window.addEventListener("wheel", handleWheel, { passive: false });
+		window.addEventListener("touchstart", handleTouchStart);
+		window.addEventListener("touchmove", handleTouchMove, { passive: false });
+		window.addEventListener("scroll", handleScroll);
+
+		return () => {
+			window.removeEventListener("wheel", handleWheel);
+			window.removeEventListener("touchstart", handleTouchStart);
+			window.removeEventListener("touchmove", handleTouchMove);
+			window.removeEventListener("scroll", handleScroll);
+			if (scrollTimeout.current) {
+				clearTimeout(scrollTimeout.current);
+			}
+		};
+	}, [isScrolling]);
 
 	const startMusic = () => {
 		if (audioRef.current) {
@@ -218,7 +274,7 @@ export default function App() {
 						subtitle="kunimizga xush kelibsiz!"
 						subtitle2="Eng yorqin yulduzlar ham bugun biz bilan birga porlayotgandek,
 chunki bu kun — biz uchun eng muhim va eng esda qolarli kun,
-bizning nikoh to‘yimiz!"
+bizning nikoh to'yimiz!"
 						names={true}
 						title2="Wedding of the"
 						time={false}
@@ -237,7 +293,7 @@ bizning nikoh to‘yimiz!"
 						title2="Manzil"
 						time={true}
 						date=""
-						manzil="Buloqboshi tumani, Yong‘oqzor to‘yxonasi"
+						manzil="Buloqboshi tumani, Yong'oqzor to'yxonasi"
 						map={true}
 						message={false}
 					/>
@@ -264,7 +320,7 @@ bizning nikoh to‘yimiz!"
 						whileInView="show"
 						className="text-4xl text-yellow-200 text-center"
 					>
-						Saytni faqat telefon orqali ko‘rish mumkin
+						Saytni faqat telefon orqali ko'rish mumkin
 					</motion.h2>
 				</div>
 			)}
