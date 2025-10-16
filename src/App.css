@@ -13,10 +13,12 @@ html {
 	scroll-behavior: smooth;
 	overflow-y: scroll;
 	height: 100vh;
+	scroll-padding-top: 0;
 }
 
 body {
 	overscroll-behavior-y: contain;
+	-webkit-overflow-scrolling: touch;
 }
 
 .text {
@@ -41,6 +43,7 @@ section {
 	perspective: 500px;
 	height: 100vh;
 	position: relative;
+	will-change: transform;
 }
 
 section > div,
@@ -49,6 +52,7 @@ section > div,
 	height: 100%;
 	position: relative;
 	overflow: hidden;
+	will-change: opacity;
 }
 
 img {
@@ -61,6 +65,37 @@ img {
 	height: 100%;
 	object-fit: cover;
 	animation: zoom 30s infinite linear;
+	transition: opacity 0.3s ease-in-out;
+	will-change: transform, opacity;
+	transform: translateZ(0);
+	-webkit-transform: translateZ(0);
+}
+
+.image-skeleton {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(110deg, #1a1a1a 8%, #2a2a2a 18%, #1a1a1a 33%);
+	background-size: 200% 100%;
+	animation: shimmer 1.5s linear infinite;
+}
+
+.skeleton-shimmer {
+	width: 100%;
+	height: 100%;
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
 }
 
 @keyframes zoom {

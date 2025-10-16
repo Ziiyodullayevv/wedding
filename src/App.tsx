@@ -4,6 +4,7 @@ import CountdownTimer from "./components/Timer";
 import TelegramBot from "./components/Message";
 import "./App.css";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const fadeIn = (direction: string, delay: number) => ({
 	hidden: {
 		y: direction === "up" ? 40 : direction === "down" ? -40 : 0,
@@ -49,7 +50,7 @@ function Image({
 	message: boolean;
 }) {
 	const [isLoaded, setIsLoaded] = useState(false);
-	const [isInView, setIsInView] = useState(false);
+	const [, setIsInView] = useState(false);
 
 	return (
 		<>
@@ -57,14 +58,21 @@ function Image({
 				<motion.div
 					className="slide-container"
 					initial={{ opacity: 0 }}
-					animate={isLoaded && isInView ? { opacity: 1 } : { opacity: 0 }}
-					transition={{ duration: 1, delay: 0.5 }}
+					animate={{ opacity: 1 }}
+					transition={{ duration: 0.5 }}
 					onViewportEnter={() => setIsInView(true)}
 				>
+					{!isLoaded && (
+						<div className="image-skeleton">
+							<div className="skeleton-shimmer"></div>
+						</div>
+					)}
 					<img
 						src={`/${id}.jpg`}
 						onLoad={() => setIsLoaded(true)}
 						alt={`Image ${id}`}
+						style={{ opacity: isLoaded ? 1 : 0 }}
+						loading="eager"
 					/>
 					<div className="overlay"></div>
 					<div className="text">
@@ -182,11 +190,19 @@ export default function App() {
 		const userAgent = navigator.userAgent;
 		const mobile = /iPhone|iPad|iPod|Android/i.test(userAgent);
 		setIsMobile(mobile);
+
+		// Preload images
+		if (mobile) {
+			[1, 2, 3].forEach((id) => {
+				const img = document.createElement("img") as HTMLImageElement;
+				img.src = `/${id}.jpg`;
+			});
+		}
 	}, []);
 
 	useEffect(() => {
 		let lastScrollTime = 0;
-		const scrollDelay = 1000; // 1 sekund scroll lock
+		const scrollDelay = 600; // 1000 dan 600 ga kamaytirildi
 
 		const handleWheel = (e: WheelEvent) => {
 			const now = Date.now();
@@ -217,7 +233,7 @@ export default function App() {
 
 				scrollTimeout.current = setTimeout(() => {
 					setIsScrolling(false);
-				}, 1000);
+				}, 600); // 1000 dan 600 ga kamaytirildi
 			}
 		};
 
