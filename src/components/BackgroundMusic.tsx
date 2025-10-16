@@ -1,52 +1,60 @@
 import { useEffect, useRef } from "react";
 
-const BackgroundMusic = () => {
+export default function BackgroundMusic() {
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 
 	useEffect(() => {
 		const audio = audioRef.current;
 		if (!audio) return;
 
-		// Avval muted holatda autoplay qilishga harakat qilamiz
-		audio.muted = true;
+		// 1. Boshlang‘ich sozlamalar
 		audio.loop = true;
+		audio.volume = 0.5;
+		audio.muted = true;
+
+		// 2. Tovushsiz autoplay
 		audio.play().catch(() => {
-			// Ba’zi brauzerlar bloklashi mumkin — keyin unmute qilamiz
+			console.log("Autoplay tovushsiz boshlandi yoki bloklandi...");
 		});
 
-		// Foydalanuvchi sahifada harakat qilganda tovushni yoqish
+		// 3. Foydalanuvchi harakati bo‘lsa tovushni yoqish
 		const enableSound = () => {
-			if (audio) {
-				audio.muted = false;
-				audio
-					.play()
-					.then(() => {
-						console.log("Music unmuted 🎵");
-					})
-					.catch(() => {
-						console.log("Still blocked");
-					});
-			}
+			if (!audio) return;
+			audio.muted = false;
 
-			// Listenerlarni olib tashlaymiz
-			window.removeEventListener("scroll", enableSound);
-			window.removeEventListener("touchstart", enableSound);
+			// sekin fade-in effekti
+			let volume = 0;
+			const fade = setInterval(() => {
+				if (volume < 0.5) {
+					volume += 0.05;
+					audio.volume = volume;
+				} else {
+					clearInterval(fade);
+				}
+			}, 200);
+
+			audio.play().then(() => console.log("🎵 Musiqa tovush bilan yoqildi!"));
 			window.removeEventListener("click", enableSound);
+			window.removeEventListener("touchstart", enableSound);
+			window.removeEventListener("scroll", enableSound);
 		};
 
-		// Mobil va desktop harakatlari uchun
-		window.addEventListener("scroll", enableSound);
-		window.addEventListener("touchstart", enableSound);
 		window.addEventListener("click", enableSound);
+		window.addEventListener("touchstart", enableSound);
+		window.addEventListener("scroll", enableSound);
 
 		return () => {
-			window.removeEventListener("scroll", enableSound);
-			window.removeEventListener("touchstart", enableSound);
 			window.removeEventListener("click", enableSound);
+			window.removeEventListener("touchstart", enableSound);
+			window.removeEventListener("scroll", enableSound);
 		};
 	}, []);
 
-	return <audio ref={audioRef} src="/music.mp3" />;
-};
-
-export default BackgroundMusic;
+	return (
+		<audio
+			ref={audioRef}
+			src="/music.mp3" // ✅ local fayl `public/music.mp3`
+			preload="auto"
+		/>
+	);
+}

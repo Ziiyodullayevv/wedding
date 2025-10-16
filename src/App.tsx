@@ -1,9 +1,8 @@
-import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import CountdownTimer from "./components/Timer";
 import TelegramBot from "./components/Message";
-import BackgroundMusic from "./components/BackgroundMusic";
+import "./App.css";
 
 export const fadeIn = (direction: string, delay: number) => ({
 	hidden: {
@@ -54,8 +53,7 @@ function Image({
 
 	return (
 		<>
-			<div className="h-[50px]"></div>
-			<section>
+			<section className="relative">
 				<motion.div
 					initial={{ opacity: 0 }}
 					animate={isLoaded && isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -63,7 +61,7 @@ function Image({
 					onViewportEnter={() => setIsInView(true)}
 				>
 					<img
-						src={`/${id}.jpg`} // `public` papkasidagi faylga to'g'ri URL
+						src={`/${id}.jpg`}
 						onLoad={() => setIsLoaded(true)}
 						alt={`Image ${id}`}
 					/>
@@ -75,30 +73,31 @@ function Image({
 								initial="hidden"
 								whileInView="show"
 								className="ar-gold text-[50px]"
-								viewport={{ once: false, amount: 0.7 }}
 							>
 								{title}
 							</motion.h2>
+
 							<motion.h2
 								variants={fadeIn("up", 0.3)}
 								initial="hidden"
 								whileInView="show"
-								viewport={{ once: false, amount: 0.7 }}
 								className="text-[45px] ar-gold -mt-6"
 							>
 								{subtitle}
 							</motion.h2>
+
 							{time && <CountdownTimer />}
 
-							<motion.p
-								variants={fadeIn("up", 0.5)}
-								initial="hidden"
-								whileInView="show"
-								viewport={{ once: false, amount: 0.7 }}
-								className="text-xl font-montserrat text-yellow-100 mt-10"
-							>
-								{subtitle2}
-							</motion.p>
+							{subtitle2 && (
+								<motion.p
+									variants={fadeIn("up", 0.5)}
+									initial="hidden"
+									whileInView="show"
+									className="text-xl font-montserrat text-yellow-100 mt-10"
+								>
+									{subtitle2}
+								</motion.p>
+							)}
 						</div>
 
 						{map && (
@@ -106,7 +105,6 @@ function Image({
 								variants={fadeIn("up", 0.4)}
 								initial="hidden"
 								whileInView="show"
-								viewport={{ once: false, amount: 0.7 }}
 								href="https://maps.app.goo.gl/i4wpDh5twzYYtB66A"
 							>
 								<div className="request-loader">
@@ -128,16 +126,18 @@ function Image({
 								<span>{title2}</span>
 								<span className="w-[30px] h-[.5px] inline-block bg-gray-200"></span>
 							</motion.h5>
+
 							{names && (
 								<motion.h3
 									variants={fadeIn("up", 0.7)}
 									initial="hidden"
 									whileInView="show"
-									className="ar-gold text-[40px] mt-2 bg-red-500"
+									className="ar-gold text-[40px] mt-2"
 								>
 									Ismoiljon vs Ruxshonaoy
 								</motion.h3>
 							)}
+
 							{manzil && (
 								<motion.h4
 									variants={fadeIn("up", 0.6)}
@@ -148,6 +148,7 @@ function Image({
 									{manzil}
 								</motion.h4>
 							)}
+
 							{date && (
 								<>
 									<span className="h-[0.3px] inline-block w-full bg-yellow-200 mt-6"></span>
@@ -171,31 +172,56 @@ function Image({
 
 export default function App() {
 	const [isMobile, setIsMobile] = useState(false);
+	const [musicStarted, setMusicStarted] = useState(false);
+	const audioRef = useRef<HTMLAudioElement | null>(null);
 
 	useEffect(() => {
-		// Qurilma mobil ekanligini aniqlaymiz
-		const checkDevice = () => {
-			const userAgent = navigator.userAgent;
-			const mobile = /iPhone|iPad|iPod|Android/i.test(userAgent);
-			setIsMobile(mobile);
-		};
-
-		checkDevice();
+		const userAgent = navigator.userAgent;
+		const mobile = /iPhone|iPad|iPod|Android/i.test(userAgent);
+		setIsMobile(mobile);
 	}, []);
+
+	const startMusic = () => {
+		if (audioRef.current) {
+			audioRef.current.play().catch((err) => console.log("Play error:", err));
+			setMusicStarted(true);
+		}
+	};
+
 	return (
 		<div>
+			<audio ref={audioRef} src="/music.mp3" loop />
+
+			{!musicStarted && (
+				<div
+					className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50"
+					onClick={startMusic}
+				>
+					<motion.div
+						initial={{ opacity: 0, scale: 0.8 }}
+						animate={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.5 }}
+						className="text-white text-center"
+					>
+						<h2 className="text-2xl font-semibold mb-2">
+							Musiqa bilan tajribani boshlash uchun bosing
+						</h2>
+						<p className="text-sm opacity-80">(Bir marta bosish kifoya)</p>
+					</motion.div>
+				</div>
+			)}
+
 			{isMobile ? (
 				<>
-					<BackgroundMusic />
 					<Image
 						id={1}
 						title="Bizning baxtli"
 						subtitle="kunimizga xush kelibsiz!"
-						subtitle2=" Biz uchun eng muhim va esda qolarli kun — to'yimiz! Sizni ushbu xursandchilik onlarini biz bilan birgalikda nishonlashga chorlaymiz."
+						subtitle2="Biz uchun eng muhim va esda qolarli kun — to‘yimiz!"
 						names={true}
 						title2="Wedding of the"
 						time={false}
-						date="26 oktabr 2025 16:00"
+						date="26 oktabr 2025 soat 16:00"
 						manzil=""
 						map={false}
 						message={false}
@@ -210,7 +236,7 @@ export default function App() {
 						title2="Manzil"
 						time={true}
 						date=""
-						manzil="Buloqboshi, Yong'oqzor to'yxonasi"
+						manzil="Buloqboshi, Yong‘oqzor to‘yxonasi"
 						map={true}
 						message={false}
 					/>
@@ -231,14 +257,13 @@ export default function App() {
 				</>
 			) : (
 				<div className="flex justify-center items-center h-screen">
-					{/* Desktop qurilmalari uchun xabar */}
 					<motion.h2
 						variants={fadeIn("up", 3)}
 						initial="hidden"
 						whileInView="show"
 						className="text-4xl text-yellow-200 text-center"
 					>
-						Saytni faqat telefon orqali ko'rish mumkin
+						Saytni faqat telefon orqali ko‘rish mumkin
 					</motion.h2>
 				</div>
 			)}
