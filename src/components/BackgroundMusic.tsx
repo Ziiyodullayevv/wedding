@@ -7,33 +7,46 @@ const BackgroundMusic = () => {
 		const audio = audioRef.current;
 		if (!audio) return;
 
-		// Muted holatda autoplay ishlaydi
+		// Avval muted holatda autoplay qilishga harakat qilamiz
 		audio.muted = true;
+		audio.loop = true;
 		audio.play().catch(() => {
-			// brauzer bloklasa, muammo yo‘q — keyin unmute qilamiz
+			// Ba’zi brauzerlar bloklashi mumkin — keyin unmute qilamiz
 		});
 
-		// Foydalanuvchi biron harakat qilganda tovushni yoqish
+		// Foydalanuvchi sahifada harakat qilganda tovushni yoqish
 		const enableSound = () => {
-			audio.muted = false;
-			audio.play();
-			document.removeEventListener("mousemove", enableSound);
-			document.removeEventListener("touchstart", enableSound);
-			document.removeEventListener("scroll", enableSound);
+			if (audio) {
+				audio.muted = false;
+				audio
+					.play()
+					.then(() => {
+						console.log("Music unmuted 🎵");
+					})
+					.catch(() => {
+						console.log("Still blocked");
+					});
+			}
+
+			// Listenerlarni olib tashlaymiz
+			window.removeEventListener("scroll", enableSound);
+			window.removeEventListener("touchstart", enableSound);
+			window.removeEventListener("click", enableSound);
 		};
 
-		document.addEventListener("mousemove", enableSound);
-		document.addEventListener("touchstart", enableSound);
-		document.addEventListener("scroll", enableSound);
+		// Mobil va desktop harakatlari uchun
+		window.addEventListener("scroll", enableSound);
+		window.addEventListener("touchstart", enableSound);
+		window.addEventListener("click", enableSound);
 
 		return () => {
-			document.removeEventListener("mousemove", enableSound);
-			document.removeEventListener("touchstart", enableSound);
-			document.removeEventListener("scroll", enableSound);
+			window.removeEventListener("scroll", enableSound);
+			window.removeEventListener("touchstart", enableSound);
+			window.removeEventListener("click", enableSound);
 		};
 	}, []);
 
-	return <audio ref={audioRef} src="/music.mp3" loop />;
+	return <audio ref={audioRef} src="/music.mp3" />;
 };
 
 export default BackgroundMusic;

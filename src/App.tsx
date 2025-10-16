@@ -54,7 +54,6 @@ function Image({
 
 	return (
 		<>
-			<BackgroundMusic />
 			<div className="h-[50px]"></div>
 			<section>
 				<motion.div
